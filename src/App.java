@@ -7,10 +7,26 @@ public class App {
     static List soci = new ArrayList<Socio>();
     static int n_soci = 0;
     static List torneo = new ArrayList<Incontro>();
-    static int n_partitte = 0;
+    static int n_partite = 0;
     static List giocatori = new ArrayList<Giocatore>();
     static int n_giocatori = 0;
     static String banner="banner.txt";
+
+
+    public static void createSocio()throws IOException{
+
+        boolean T=true;
+        int S;
+
+        while (T) {
+
+            ConsoleTools.clearScreen();
+            ConsoleTools.printAsciiFromFile(banner);
+            
+        }
+
+
+    }
 
 
     public static void main(String[] args)throws IOException {
@@ -23,13 +39,15 @@ public class App {
             ConsoleTools.clearScreen();
             ConsoleTools.printAsciiFromFile(banner);
 
-            System.out.print("Opzioni:\n1)Crea Socio\n2)Crea Giocatore\n3)Crea Squadra\n4)Crea Torneo\n5)Gioca Torneo\n6)Esci\n>>");
+            System.out.print("Opzioni:\n1)Crea Socio (Soci: " + n_soci + ")\n2)Crea Giocatore (Giocatori: " + n_giocatori + ")\n3)Crea Partita (Partite: " + n_partite + ")\n4)Gioca Torneo\n5)Esci\n>>");
             S = s.nextInt();
 
 
             switch (S) {
 
                 case 1:{
+
+                    createSocio();
                     
                     break;
 
