@@ -5,7 +5,7 @@ public class App {
 
     static Scanner s = new Scanner(System.in);
     static Random rand = new Random();
-    static int upperbound = 11; //! perchè random ritorna un nuemro tra 0 e massimo-1
+    static int upperbound = 11; //! perchè random ritorna un numero tra 0 e massimo-1
     static List soci = new ArrayList<Socio>();
     static int n_soci = 0;
     static List torneo = new ArrayList<Incontro>();
