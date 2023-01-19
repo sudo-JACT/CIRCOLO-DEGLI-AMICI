@@ -38,14 +38,14 @@ public class Incontro {
 
             }else if(p2 > p1){
 
-                this.g1.addScore(3);
+                this.g2.addScore(3);
 
                 return 1;
 
             }else{
 
                 this.g1.addScore(1);
-                this.g2.addScore(2);
+                this.g2.addScore(1);
 
                 return 0;
 

@@ -89,15 +89,23 @@ public class App {
 
                     }
 
-                    System.out.print("Indice >>");
+                    System.out.print("Socio numero >>");
                     ind = s.nextInt();
                     ind--;
 
-                    gi = new Giocatore((Socio) soci.get(ind));
-                    giocatori.add(gi);
-                    n_giocatori++;
+                    if(ind > n_soci || ind < 0){
 
-                    System.out.println(gi.getName() + " " + gi.getSurname() + " aggiunto con successo");
+                        System.out.println("Scelta non valida");
+
+                    }else{
+
+                        gi = new Giocatore((Socio) soci.get(ind));
+                        giocatori.add(gi);
+                        n_giocatori++;
+
+                        System.out.println(gi.getName() + " " + gi.getSurname() + " aggiunto con successo");
+
+                    }
 
                 }
 
@@ -119,6 +127,106 @@ public class App {
             ConsoleTools.w();
             
         }
+
+    }
+
+    public static void createGame()throws IOException{
+
+        int ind1, ind2;
+        boolean T=true;
+        Incontro ii;
+
+
+        ConsoleTools.clearScreen();
+        ConsoleTools.printAsciiFromFile(banner);
+
+        showGiocatori();
+
+        System.out.print("Primo Giocatore >>");
+        ind1 = s.nextInt();
+        ind1--;
+
+        System.out.print("Secondo Giocatore >>");
+        ind2 = s.nextInt();
+        ind2--;
+
+        if(ind1 == ind2 || ind1 > n_giocatori || ind1 < 0 || ind2 > n_giocatori || ind2 < 0){
+
+            System.out.println("Scelta non valida");
+            ConsoleTools.w();
+
+            createGame();
+
+        }else{
+
+            ii = new Incontro((Giocatore) giocatori.get(ind1), (Giocatore) giocatori.get(ind2));
+            torneo.add(ii);
+            n_partite++;
+            System.out.println("Partita creata con successo");
+
+            
+        }
+
+        ConsoleTools.w();
+
+    }
+
+    public static void playGames(){
+
+        for(int i=0; i < n_partite; i++){
+
+            Incontro ii = (Incontro) torneo.get(i);
+            int p1 = rand.nextInt(upperbound), p2 = rand.nextInt(upperbound);
+
+            ii.play(p1, p2); 
+            System.out.println(ii.toString());
+
+        }
+
+        ConsoleTools.w();
+        
+    }
+
+    public static void showSoci(){
+
+
+        if(n_soci > 0){
+
+            for(int i=0; i < n_soci; i++){
+
+                Socio so = (Socio) soci.get(i);
+                System.out.println((i+1) + ")" + so.getName() + " " + so.getSurname());
+
+            }
+
+        }else{
+
+            System.out.println("Ancora nessun Socio");
+
+        }
+
+
+    }
+
+
+    public static void showGiocatori(){
+
+
+        if(n_giocatori > 0){
+
+            for(int i=0; i < n_giocatori; i++){
+
+                Giocatore go = (Giocatore) giocatori.get(i);
+                System.out.println((i+1) + ")" + go.getName() + " " + go.getSurname());
+
+            }
+
+        }else{
+
+            System.out.println("Ancora nessun Giocatore");
+
+        }
+        
 
     }
 
@@ -156,9 +264,37 @@ public class App {
                 }
 
 
+                case 3:{
+
+                    createGame();
+
+                    break;
+
+                }
+
+
+                case 4:{
+
+                    playGames();
+
+                    break;
+
+                }
+
+
+                case 5:{
+
+                    showSoci();
+                    ConsoleTools.w();
+                    break;
+
+                }
+
                 case 6:{
 
-                    show();
+                    showGiocatori();
+                    ConsoleTools.w();
+                    break;
 
                 }
 
