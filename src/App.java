@@ -1,22 +1,49 @@
+import java.io.IOException;
+import java.util.*;
+
 public class App {
-    
 
-    public static void main(String[] args) {
-        
-        Socio s1 = new Socio("Mario", "Rossi");
-        Socio s2 = new Socio("Luigi", "Bianchi");
-
-        Giocatore g1 = new Giocatore(s1);
-        Giocatore g2 = new Giocatore("Luca", "Verdi");
-
-        Incontro i1 = new Incontro(g1, g2);
+    static Scanner s = new Scanner(System.in);
+    static List soci = new ArrayList<Socio>();
+    static int n_soci = 0;
+    static List torneo = new ArrayList<Incontro>();
+    static int n_partitte = 0;
+    static List giocatori = new ArrayList<Giocatore>();
+    static int n_giocatori = 0;
+    static String banner="banner.txt";
 
 
-        System.out.println(s1.toString() + "\n" + s2.toString() + "\n" + g1.toString() + "\n" + g2.toString() + "\n" + i1.toString());
-            
-        i1.play(10, 5);
+    public static void main(String[] args)throws IOException {
+       
+        boolean T=true;
+        int S;
 
-        System.out.println(i1.toString());
+        while(T){
+
+            ConsoleTools.clearScreen();
+            ConsoleTools.printAsciiFromFile(banner);
+
+            System.out.print("Opzioni:\n1)Crea Socio\n2)Crea Giocatore\n3)Crea Squadra\n4)Crea Torneo\n5)Gioca Torneo\n6)Esci\n>>");
+            S = s.nextInt();
+
+
+            switch (S) {
+
+                case 1:{
+                    
+                    break;
+
+                }
+
+                default:{
+                 
+                    break;
+
+                }
+            }
+
+
+        }
 
     }
 
