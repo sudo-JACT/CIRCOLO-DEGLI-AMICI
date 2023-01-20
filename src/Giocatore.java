@@ -44,6 +44,31 @@ public class Giocatore extends Socio{
     }
 
     @Override
+    public boolean equals(Object obj) {
+       
+        if(obj == null || !(obj instanceof Giocatore)){
+
+            return false;
+
+        }else{
+
+            Giocatore g = (Giocatore) obj;
+
+            if(this.name.equalsIgnoreCase(g.getName()) && this.surname.equalsIgnoreCase(g.getSurname()) && this.tessera == g.getTessera() && this.score == g.getScore()){
+
+                return true;
+
+            }else{
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+    @Override
     public String toString() {
        
         return this.name + " " + this.surname + ": " + this.score;
