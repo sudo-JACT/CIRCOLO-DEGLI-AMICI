@@ -26,6 +26,12 @@ public class Incontro {
 
     }
 
+    public boolean wasPlayed(){
+
+        return this.played;
+
+    }
+
     public int play(int p1, int p2){
 
         if(!this.played){

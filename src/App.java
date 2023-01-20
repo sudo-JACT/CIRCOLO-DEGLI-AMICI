@@ -11,6 +11,7 @@ public class App {
     static List torneo = new ArrayList<Incontro>();
     static int n_partite = 0;
     static List giocatori = new ArrayList<Giocatore>();
+    static List printedplayers = new ArrayList<Byob>();
     static int n_giocatori = 0;
     static String banner="banner.txt";
 
@@ -49,6 +50,7 @@ public class App {
         String name, surname;
         Socio so;
         Giocatore gi;
+        Byob b;
         boolean T=true;
 
         while (T) {
@@ -71,6 +73,8 @@ public class App {
                     soci.add(so);
                     gi = new Giocatore(so);
                     giocatori.add(gi);
+                    b = new Byob();
+                    printedplayers.add(b);
                     n_soci++;
                     n_giocatori++;
 
@@ -207,6 +211,85 @@ public class App {
         
     }
 
+
+    public static void showClassifica(){
+
+        boolean F = true;
+
+        for(int i=0; i < n_partite; i++){
+
+            Incontro ii = (Incontro) torneo.get(i);
+
+            if(!(ii.wasPlayed())){
+
+                F = false;
+
+            }
+
+        }
+
+        if(n_partite <= 0 || !F){
+
+            System.out.println("Ancora nessuna Partita creata/giocata");
+
+        }else{
+    
+            int max=0, Max, indmax=0;
+
+            for(int i=0; i < n_giocatori; i++){
+            
+                Giocatore g = (Giocatore) giocatori.get(i);
+
+                if(g.getScore() > max){
+            
+                    max = g.getScore();
+                    indmax = i;
+            
+                }
+
+            }
+
+            for(int i=0; i < n_giocatori; i++){
+
+                int position = 1;
+                Giocatore g = (Giocatore) giocatori.get(indmax);
+                Byob b = (Byob) printedplayers.get(indmax);
+                Max = max;
+                max = 0;
+                System.out.println(position + ")" + g.toString());
+                b.setToTrue();
+                position++;
+
+                for(int j=0; j < n_giocatori; j++){
+
+                    Giocatore g2 = (Giocatore) giocatori.get(j);
+                    Byob b2 = (Byob) printedplayers.get(j);
+
+                    if(g2.getScore() >= max && g2.getScore() < Max && b2.getState() == false){
+
+                        max = g2.getScore();
+                        indmax = j;
+
+                    }
+
+                }
+
+            }
+
+            for(int i=0; i < n_giocatori; i++){
+
+                Byob b = (Byob) printedplayers.get(i);
+                b.setToFalse();
+
+            }
+    
+
+        }
+
+        ConsoleTools.w();
+
+    }
+
     public static void showSoci(){
 
 
@@ -261,7 +344,7 @@ public class App {
             ConsoleTools.clearScreen();
             ConsoleTools.printAsciiFromFile(banner);
 
-            System.out.print("Opzioni:\n1)Crea Socio (Soci: " + n_soci + ")\n2)Crea Giocatore (Giocatori: " + n_giocatori + ")\n3)Crea Partita (Partite: " + n_partite + ")\n4)Gioca Torneo\n5)Show Soci\n6)Show Giocatori\n7)Esci\n>>");
+            System.out.print("Opzioni:\n1)Crea Socio (Soci: " + n_soci + ")\n2)Crea Giocatore (Giocatori: " + n_giocatori + ")\n3)Crea Partita (Partite: " + n_partite + ")\n4)Gioca Torneo\n5)Classifica\n6)Show Soci\n7)Show Giocatori\n8)Esci\n>>");
             S = s.nextInt();
 
 
@@ -301,8 +384,14 @@ public class App {
 
                 }
 
-
                 case 5:{
+
+                    showClassifica();
+                    break;
+
+                }
+
+                case 6:{
 
                     showSoci();
                     ConsoleTools.w();
@@ -310,7 +399,7 @@ public class App {
 
                 }
 
-                case 6:{
+                case 7:{
 
                     showGiocatori();
                     ConsoleTools.w();
@@ -319,7 +408,7 @@ public class App {
                 }
 
 
-                case 7:{
+                case 8:{
 
                     T = false;
                     break;
