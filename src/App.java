@@ -265,7 +265,7 @@ public class App {
                     Giocatore g2 = (Giocatore) giocatori.get(j);
                     Byob b2 = (Byob) printedplayers.get(j);
 
-                    if(g2.getScore() >= max && g2.getScore() < Max && b2.getState() == false){
+                    if(g2.getScore() >= max && g2.getScore() <= Max && b2.getState() == false){
 
                         max = g2.getScore();
                         indmax = j;

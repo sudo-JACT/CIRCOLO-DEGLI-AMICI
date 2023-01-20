@@ -39,12 +39,14 @@ public class Incontro {
             if(p1 > p2){
 
                 this.g1.addScore(3);
+                this.played = true;
 
                 return -1;
 
             }else if(p2 > p1){
 
                 this.g2.addScore(3);
+                this.played = true;
 
                 return 1;
 
@@ -52,10 +54,12 @@ public class Incontro {
 
                 this.g1.addScore(1);
                 this.g2.addScore(1);
+                this.played = true;
 
                 return 0;
 
             }
+
 
         }else{
 
@@ -79,19 +83,27 @@ public class Incontro {
 
     public int getWinner(){
 
-        if(this.g1.getScore() > this.g2.getScore()){
+        if(this.played){  
 
-            return -1;
+            if(this.g1.getScore() > this.g2.getScore()){
 
-        }else if(this.g2.getScore() > this.g1.getScore()){
+                return -1;
 
-            return 1;
+            }else if(this.g2.getScore() > this.g1.getScore()){
+
+                return 1;
+
+            }else{
+
+                return 0;
+
+            }
 
         }else{
 
-            return 0;
+            return 404;
 
-        }
+        } 
 
     }
 
