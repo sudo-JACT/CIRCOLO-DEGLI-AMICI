@@ -214,6 +214,8 @@ public class App {
 
     public static void showClassifica(){
 
+        int position=1;
+
         boolean F = true;
 
         for(int i=0; i < n_partite; i++){
@@ -251,7 +253,6 @@ public class App {
 
             for(int i=0; i < n_giocatori; i++){
 
-                int position = 1;
                 Giocatore g = (Giocatore) giocatori.get(indmax);
                 Byob b = (Byob) printedplayers.get(indmax);
                 Max = max;
