@@ -82,28 +82,31 @@ public class App {
 
                 case 2:{
 
-                    for(int i=0; i < n_soci; i++){
+                    if(n_soci > 0){
 
-                        so = (Socio) soci.get(i);
-                        System.out.println((i+1) + ")" + so.getName() + " " + so.getSurname());
+                        showSoci();
 
-                    }
+                        System.out.print("Socio numero >>");
+                        ind = s.nextInt();
+                        ind--;
 
-                    System.out.print("Socio numero >>");
-                    ind = s.nextInt();
-                    ind--;
+                        if(ind > n_soci || ind < 0){
 
-                    if(ind > n_soci || ind < 0){
+                            System.out.println("Scelta non valida");
 
-                        System.out.println("Scelta non valida");
+                        }else{
+
+                            gi = new Giocatore((Socio) soci.get(ind));
+                            giocatori.add(gi);
+                            n_giocatori++;
+
+                            System.out.println(gi.getName() + " " + gi.getSurname() + " aggiunto con successo");
+
+                        }
 
                     }else{
 
-                        gi = new Giocatore((Socio) soci.get(ind));
-                        giocatori.add(gi);
-                        n_giocatori++;
-
-                        System.out.println(gi.getName() + " " + gi.getSurname() + " aggiunto con successo");
+                        System.out.println("Nessun Socio ancora presente");
 
                     }
 
@@ -140,31 +143,39 @@ public class App {
         ConsoleTools.clearScreen();
         ConsoleTools.printAsciiFromFile(banner);
 
-        showGiocatori();
+        if(n_giocatori > 1){
 
-        System.out.print("Primo Giocatore >>");
-        ind1 = s.nextInt();
-        ind1--;
+            showGiocatori();
 
-        System.out.print("Secondo Giocatore >>");
-        ind2 = s.nextInt();
-        ind2--;
+            System.out.print("Primo Giocatore >>");
+            ind1 = s.nextInt();
+            ind1--;
 
-        if(ind1 == ind2 || ind1 > n_giocatori || ind1 < 0 || ind2 > n_giocatori || ind2 < 0){
+            System.out.print("Secondo Giocatore >>");
+            ind2 = s.nextInt();
+            ind2--;
 
-            System.out.println("Scelta non valida");
-            ConsoleTools.w();
+            if(ind1 == ind2 || ind1 > n_giocatori || ind1 < 0 || ind2 > n_giocatori || ind2 < 0){
 
-            createGame();
+                System.out.println("Scelta non valida");
+                ConsoleTools.w();
+
+                createGame();
+
+            }else{
+
+                ii = new Incontro((Giocatore) giocatori.get(ind1), (Giocatore) giocatori.get(ind2));
+                torneo.add(ii);
+                n_partite++;
+                System.out.println("Partita creata con successo");
+
+
+            }
 
         }else{
 
-            ii = new Incontro((Giocatore) giocatori.get(ind1), (Giocatore) giocatori.get(ind2));
-            torneo.add(ii);
-            n_partite++;
-            System.out.println("Partita creata con successo");
+            System.out.println("Non ci sono abbastanza Giocatori per creare una Partita");
 
-            
         }
 
         ConsoleTools.w();
@@ -173,13 +184,22 @@ public class App {
 
     public static void playGames(){
 
-        for(int i=0; i < n_partite; i++){
 
-            Incontro ii = (Incontro) torneo.get(i);
-            int p1 = rand.nextInt(upperbound), p2 = rand.nextInt(upperbound);
+        if(n_partite > 0){
 
-            ii.play(p1, p2); 
-            System.out.println(ii.toString());
+            for(int i=0; i < n_partite; i++){
+
+                Incontro ii = (Incontro) torneo.get(i);
+                int p1 = rand.nextInt(upperbound), p2 = rand.nextInt(upperbound);
+
+                ii.play(p1, p2); 
+                System.out.println(ii.toString());
+
+            }
+
+        }else{
+
+            System.out.println("Ancora nessuna Partita creata");
 
         }
 
